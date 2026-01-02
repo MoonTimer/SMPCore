@@ -1,0 +1,113 @@
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "smpcore"
+  user: "root"
+  password: ""
+  use-ssl: false
+  pool:
+    maximum-pool-size: 10
+    minimum-idle: 2
+
+teleport:
+  warmup-seconds: 3
+  cancel-on-move: true
+  cancel-on-damage: true
+  cooldowns:
+    spawn: 10
+    home: 5
+    tpa: 10
+    back: 10
+    rtp: 300
+    warp: 5
+
+homes:
+  default-limit: 1
+
+back:
+  on-teleport: true
+  on-death: true
+
+rtp:
+  enabled: true
+  min-radius: 500
+  max-radius: 5000
+  max-tries: 20
+  blacklist-worlds: []
+  blacklist-biomes: []
+  safe-check:
+    require-solid-below: true
+    deny-water: true
+    deny-lava: true
+    deny-leaves: false
+  warmup-seconds: 5
+  cooldown-seconds: 300
+
+combat:
+  enabled: true
+  tag-seconds: 10
+  block-rtp: true
+  block-tpa: true
+  quit-kill: true
+
+chat:
+  msg-format: "&7Moontimer -+ {sender} -> {target}: {message}"
+  msg-cooldown-seconds: 1
+  mutechat-enabled: true
+
+tablist:
+  enabled: true
+  update-interval-seconds: 10
+  header:
+    - "&bSMP-Core"
+    - "&7Willkommen {player}"
+  footer:
+    - "&7Online: {online}/{max}"
+    - "&7Welt: {world}"
+
+motd:
+  enabled: true
+  lines:
+    - "&bSMP-Core"
+    - "&7Willkommen! &8({online}/{max})"
+
+punishments:
+  default-reason: "Regelverstoss"
+  ban-screen: "&cDu wurdest gebannt: {reason}\n&7Ende: {expires}\n&7ID: {id}"
+  reason-presets:
+    ban:
+      - reason: "Hacking"
+        duration: "30d"
+      - reason: "Griefing"
+        duration: "14d"
+      - reason: "X-Ray"
+        duration: "30d"
+      - reason: "Bugusing"
+        duration: "7d"
+    mute:
+      - reason: "Spam"
+        duration: "30m"
+      - reason: "Beleidigung"
+        duration: "2h"
+      - reason: "Provokation"
+        duration: "1h"
+
+staff-menu:
+  ban-reasons:
+    - "Hacking"
+    - "Griefing"
+    - "X-Ray"
+    - "Bugusing"
+  warn-reasons:
+    - "Spam"
+    - "Beleidigung"
+    - "Provokation"
+
+economy:
+  enabled: false
+  start-balance: 0.0
+  minimum-pay: 1.0
+
+audit:
+  file-enabled: false
+  file-path: "logs/smpcore-audit.log"

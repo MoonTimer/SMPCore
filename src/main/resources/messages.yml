@@ -1,0 +1,158 @@
+prefix: "&8[&bSMP&fCore&8] &7"
+
+errors:
+  no-permission: "&cDazu hast du keine Berechtigung."
+  player-only: "&cNur Spieler koennen diesen Befehl nutzen."
+  player-not-found: "&cSpieler nicht gefunden."
+  target-offline: "&cDer Spieler ist offline."
+  invalid-args: "&cBenutzung: {usage}"
+  on-cooldown: "&cBitte warte {time}."
+  warmup-start: "&7Teleport in {time}s. Bitte nicht bewegen."
+  warmup-cancelled: "&cTeleport abgebrochen."
+  no-back: "&cKein Ruecksetzpunkt vorhanden."
+  home-not-found: "&cHome nicht gefunden."
+  home-limit: "&cHome-Limit erreicht ({limit})."
+  warp-not-found: "&cWarp nicht gefunden."
+  rtp-disabled: "&cRTP ist deaktiviert."
+  rtp-failed: "&cKein sicherer Ort gefunden."
+  cannot-message: "&cDu kannst diesem Spieler nicht schreiben."
+  muted: "&cDu bist gemutet."
+  global-muted: "&cDer Chat ist aktuell stummgeschaltet."
+  economy-disabled: "&cEconomy ist deaktiviert."
+  in-combat: "&cDu bist im Kampf. Warte {time}."
+
+chat:
+  socialspy-format: "&8[Spy] {sender} -> {target}: {message}"
+
+teleport:
+  spawn: "&aZum Spawn teleportiert."
+  back: "&aZurueck teleportiert."
+  home-set: "&aHome {home} gesetzt."
+  home-deleted: "&aHome {home} geloescht."
+  home-teleport: "&aZu Home {home} teleportiert."
+  homes-list: "&7Homes ({count}): {homes}"
+  warps-list: "&7Warps ({count}): {warps}"
+  warp-set: "&aWarp {warp} gesetzt."
+  warp-deleted: "&aWarp {warp} geloescht."
+  warp-teleport: "&aZu Warp {warp} teleportiert."
+
+rtp:
+  searching: "&7Suche sicheren Ort..."
+  teleport: "&aZufallsteleport gestartet."
+  countdown-title: "&bRTP in {time}"
+  countdown-subtitle: "&7Bitte nicht bewegen"
+  cancel-title: "&cTeleport abgebrochen"
+  cancel-subtitle: "&7Bitte nicht bewegen"
+
+tpa:
+  sent: "&7Anfrage an &f{target}&7 gesendet."
+  received: "&7TPA-Anfrage von &f{player}&7. Klicke unten oder nutze /tpaccept oder /tpdeny."
+  click-accept: "&a[Annehmen]"
+  click-deny: "&c[Ablehnen]"
+  click-hover-accept: "&aKlicke zum Annehmen"
+  click-hover-deny: "&cKlicke zum Ablehnen"
+  accepted: "&aTeleport-Anfrage angenommen."
+  denied: "&cTeleport-Anfrage abgelehnt."
+  cancelled: "&cTeleport-Anfrage abgebrochen."
+  expired: "&cTeleport-Anfrage abgelaufen."
+  none: "&cKeine offene Anfrage."
+
+msg:
+  sent: "&7Moontimer -+ an {target}: {message}"
+  received: "&7Moontimer -+ von {sender}: {message}"
+  reply-none: "&cNiemand zum Antworten."
+
+ignore:
+  added: "&7Du ignorierst jetzt {target}."
+  removed: "&7Du ignorierst {target} nicht mehr."
+  list: "&7Ignoriert ({count}): {players}"
+
+socialspy:
+  enabled: "&7SocialSpy aktiviert."
+  disabled: "&7SocialSpy deaktiviert."
+
+mutechat:
+  enabled: "&cGlobaler Chat-Mute aktiviert."
+  disabled: "&aGlobaler Chat-Mute deaktiviert."
+
+moderation:
+  ban: "&c{target} wurde gebannt. ID: {id}"
+  tempban: "&c{target} wurde fuer {duration} gebannt. ID: {id}"
+  unban: "&a{target} wurde entbannt."
+  mute: "&c{target} wurde gemutet. ID: {id}"
+  tempmute: "&c{target} wurde fuer {duration} gemutet. ID: {id}"
+  unmute: "&a{target} wurde entmutet."
+  warn: "&e{target} verwarnt. ID: {id}"
+  unwarn: "&aLetzte Verwarnung entfernt fuer {target}."
+  clearwarnings: "&aAlle Verwarnungen entfernt fuer {target}."
+  kick: "&c{target} wurde gekickt."
+  history-header: "&7Verlauf fuer {target} (Seite {page}/{pages}):"
+  staffhistory-header: "&7Verlauf von {staff} (Seite {page}/{pages}):"
+  banlist-header: "&7Aktive Bans (Seite {page}/{pages}):"
+  warnings-header: "&7Warnungen fuer {target} (Seite {page}/{pages}):"
+  history-line: "&7#{id} {type} {reason} {created} {expires}"
+  no-history: "&7Keine Eintraege."
+  reasons-header: "&7Vorgefertigte {type}-Gruende:"
+  reasons-line: "&7- {reason} &8({duration})"
+  reasons-empty: "&7Keine Eintraege."
+
+punishments:
+  mute-message: "&cDu bist gemutet: {reason} ({expires})"
+
+staff:
+  whois: "&7Name: {name} UUID: {uuid} IP: {ip} Erst: {first} Letzt: {last}"
+  info-header: "&bInfo fuer {player}"
+  info-line: "&7UUID: {uuid} | IP: {ip}"
+  info-joins: "&7Erster Join: {first} | Letzter Join: {last}"
+  info-playtime: "&7Spielzeit: {playtime}"
+  info-warnings: "&7Warnungen: {warnings}"
+  info-lastban: "&7Letzter Ban: {reason} ({status}) {created}"
+  info-lastban-none: "&7Letzter Ban: -"
+  info-lastmute: "&7Letzter Mute: {reason} ({status}) {created}"
+  info-lastmute-none: "&7Letzter Mute: -"
+  info-lastwarn: "&7Letzte Warnung: {reason} {created}"
+  info-lastwarn-none: "&7Letzte Warnung: -"
+  info-teleport: "&a[Vanishtp]"
+  gamemode: "&aGamemode gesetzt: {mode} fuer {target}."
+  fly-enabled: "&aFlug aktiviert fuer {target}."
+  fly-disabled: "&cFlug deaktiviert fuer {target}."
+  healed: "&a{target} geheilt."
+  fed: "&a{target} gefuettert."
+  speed: "&aSpeed {speed} fuer {target}."
+  invsee: "&7Inventar von {target} geoeffnet."
+  endersee: "&7Endertruhe von {target} geoeffnet."
+  vanish-enabled: "&aVanish aktiviert fuer {target}."
+  vanish-disabled: "&cVanish deaktiviert fuer {target}."
+  vtp: "&aVanish-TP zu {target}."
+  tpall: "&a{count} Spieler zu dir teleportiert."
+  tppos: "&aTeleportiert zu {x} {y} {z} in {world}."
+  clearchat: "&7Chat wurde geleert."
+
+tablist:
+  header-updated: "&aTablist-Header gespeichert."
+  footer-updated: "&aTablist-Footer gespeichert."
+  reloaded: "&aTablist neu geladen."
+
+motd:
+  updated: "&aMOTD gespeichert."
+  reloaded: "&aMOTD neu geladen."
+
+combat:
+  logout: "&c{player} hat im Kampf ausgeloggt."
+
+economy:
+  balance: "&7Kontostand: &a{balance}"
+  pay-sent: "&aDu hast {target} {amount} bezahlt."
+  pay-received: "&aDu hast {amount} von {player} erhalten."
+  pay-minimum: "&cMindestbetrag ist {amount}."
+  pay-insufficient: "&cNicht genug Guthaben."
+
+core:
+  reloaded: "&aConfig neu geladen."
+  migrated: "&aDatenbank-Migration abgeschlossen."
+
+help:
+  header: "&bSMP-Core Hilfe"
+  player: "&7Spieler: /spawn /sethome /home /back /tpa /tpahere /tpaccept /tpdeny /rtp /msg /reply /ignore /balance /pay"
+  staff: "&7Staff: /menu /gamemode /fly /tp /tphere /whois /info /heal /feed /speed /invsee /endersee /vanish /vtp /tpall /tppos /clearchat /tablist /motd"
+  moderation: "&7Mod: /ban /tempban /mute /tempmute /warn /warnings /kick /reasons /history /banlist"
