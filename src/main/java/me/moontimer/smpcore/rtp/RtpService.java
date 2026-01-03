@@ -13,6 +13,7 @@ import org.bukkit.HeightMap;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -43,23 +44,20 @@ public class RtpService {
             return;
         }
         messages.send(player, "rtp.searching");
-        int minRadius = config.getInt("rtp.min-radius", 0);
-        int maxRadius = config.getInt("rtp.max-radius", 0);
-        int min = Math.min(minRadius, maxRadius);
-        int max = Math.max(minRadius, maxRadius);
         int maxTries = config.getInt("rtp.max-tries", 20);
         Set<String> blockedBiomes = new HashSet<>(config.getStringList("rtp.blacklist-biomes"));
         boolean requireSolid = config.getBoolean("rtp.safe-check.require-solid-below", true);
         boolean denyWater = config.getBoolean("rtp.safe-check.deny-water", true);
         boolean denyLava = config.getBoolean("rtp.safe-check.deny-lava", true);
         boolean denyLeaves = config.getBoolean("rtp.safe-check.deny-leaves", false);
+        CoordinateRange range = getWorldRange(world);
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            Location found = findRandomLocation(world, min, max, maxTries, blockedBiomes,
+            Location found = findRandomLocation(world, range, maxTries, blockedBiomes,
                     requireSolid, denyWater, denyLava, denyLeaves);
             if (found == null) {
                 int fallbackTries = Math.max(100, maxTries * 5);
-                found = findRandomLocation(world, min, max, fallbackTries, Set.of(),
+                found = findRandomLocation(world, range, fallbackTries, Set.of(),
                         false, false, denyLava, false);
             }
             if (found == null) {
@@ -87,16 +85,38 @@ public class RtpService {
         });
     }
 
-    private Location findRandomLocation(World world, int min, int max, int tries, Set<String> blockedBiomes,
+    private CoordinateRange getWorldRange(World world) {
+        WorldBorder border = world.getWorldBorder();
+        Location center = border.getCenter();
+        double radius = border.getSize() / 2.0;
+        if (radius <= 1.0) {
+            int x = center.getBlockX();
+            int z = center.getBlockZ();
+            return new CoordinateRange(x, x, z, z);
+        }
+        double safeRadius = Math.max(0.0, radius - 1.0);
+        int minX = (int) Math.floor(center.getX() - safeRadius);
+        int maxX = (int) Math.ceil(center.getX() + safeRadius);
+        int minZ = (int) Math.floor(center.getZ() - safeRadius);
+        int maxZ = (int) Math.ceil(center.getZ() + safeRadius);
+        if (minX > maxX) {
+            int tmp = minX;
+            minX = maxX;
+            maxX = tmp;
+        }
+        if (minZ > maxZ) {
+            int tmp = minZ;
+            minZ = maxZ;
+            maxZ = tmp;
+        }
+        return new CoordinateRange(minX, maxX, minZ, maxZ);
+    }
+
+    private Location findRandomLocation(World world, CoordinateRange range, int tries, Set<String> blockedBiomes,
                                         boolean requireSolid, boolean denyWater, boolean denyLava, boolean denyLeaves) {
-        int startX = world.getSpawnLocation().getBlockX();
-        int startZ = world.getSpawnLocation().getBlockZ();
-        int range = Math.max(1, max - min + 1);
         for (int i = 0; i < tries; i++) {
-            int radius = min + random.nextInt(range);
-            double angle = random.nextDouble() * Math.PI * 2;
-            int x = startX + (int) Math.round(Math.cos(angle) * radius);
-            int z = startZ + (int) Math.round(Math.sin(angle) * radius);
+            int x = range.randomX(random);
+            int z = range.randomZ(random);
             Location candidate = findSafeLocation(world, x, z, blockedBiomes, requireSolid, denyWater, denyLava, denyLeaves);
             if (candidate != null) {
                 return candidate;
@@ -132,6 +152,13 @@ public class RtpService {
                                       boolean requireSolid, boolean denyWater, boolean denyLava, boolean denyLeaves) {
         try {
             return Bukkit.getScheduler().callSyncMethod(plugin, () -> {
+                int chunkX = x >> 4;
+                int chunkZ = z >> 4;
+                if (!world.isChunkLoaded(chunkX, chunkZ)) {
+                    if (!world.loadChunk(chunkX, chunkZ, true)) {
+                        return null;
+                    }
+                }
                 int minY = world.getMinHeight();
                 int maxY = world.getHighestBlockYAt(x, z, HeightMap.MOTION_BLOCKING_NO_LEAVES);
                 int maxWorldY = world.getMaxHeight() - 1;
@@ -187,6 +214,23 @@ public class RtpService {
                 || material == Material.SEAGRASS
                 || material == Material.TALL_SEAGRASS
                 || material == Material.BUBBLE_COLUMN;
+    }
+
+    private record CoordinateRange(int minX, int maxX, int minZ, int maxZ) {
+        int randomX(Random random) {
+            return randomBetween(random, minX, maxX);
+        }
+
+        int randomZ(Random random) {
+            return randomBetween(random, minZ, maxZ);
+        }
+
+        private int randomBetween(Random random, int min, int max) {
+            if (max <= min) {
+                return min;
+            }
+            return min + random.nextInt(max - min + 1);
+        }
     }
 }
 

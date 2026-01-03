@@ -15,6 +15,7 @@ errors:
   warp-not-found: "&cWarp nicht gefunden."
   rtp-disabled: "&cRTP ist deaktiviert."
   rtp-failed: "&cKein sicherer Ort gefunden."
+  command-disabled: "&cDieser Befehl ist deaktiviert."
   cannot-message: "&cDu kannst diesem Spieler nicht schreiben."
   muted: "&cDu bist gemutet."
   global-muted: "&cDer Chat ist aktuell stummgeschaltet."

@@ -9,9 +9,14 @@ import me.moontimer.smpcore.listener.PlayerConnectionListener;
 import me.moontimer.smpcore.listener.PreLoginListener;
 import me.moontimer.smpcore.listener.WarmupListener;
 import me.moontimer.smpcore.menu.MenuListener;
+import me.moontimer.smpcore.core.MessageService;
+import java.util.List;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
 
 public class PluginWiring {
@@ -129,9 +134,79 @@ public class PluginWiring {
             plugin.getLogger().warning("Command not found in plugin.yml: " + name);
             return;
         }
-        command.setExecutor(executor);
-        if (executor instanceof TabCompleter tabCompleter) {
-            command.setTabCompleter(tabCompleter);
+        GuardedCommandExecutor guarded = new GuardedCommandExecutor(plugin, name, executor);
+        command.setExecutor(guarded);
+        if (executor instanceof TabCompleter) {
+            command.setTabCompleter(guarded);
+        }
+    }
+
+    private static final class GuardedCommandExecutor implements CommandExecutor, TabCompleter {
+        private final SmpCorePlugin plugin;
+        private final String commandName;
+        private final CommandExecutor delegate;
+        private final TabCompleter tabCompleter;
+
+        private GuardedCommandExecutor(SmpCorePlugin plugin, String commandName, CommandExecutor delegate) {
+            this.plugin = plugin;
+            this.commandName = commandName;
+            this.delegate = delegate;
+            this.tabCompleter = delegate instanceof TabCompleter completer ? completer : null;
+        }
+
+        @Override
+        public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
+            if (!isCommandEnabled(commandName)) {
+                sendDisabled(sender);
+                return true;
+            }
+            return delegate.onCommand(sender, command, label, args);
+        }
+
+        @Override
+        public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String alias,
+                                           String[] args) {
+            if (!isCommandEnabled(commandName)) {
+                return List.of();
+            }
+            if (tabCompleter == null) {
+                return List.of();
+            }
+            return tabCompleter.onTabComplete(sender, command, alias, args);
+        }
+
+        private boolean isCommandEnabled(String name) {
+            FileConfiguration config = plugin.getConfig();
+            ConfigurationSection features = config.getConfigurationSection("features");
+            if (features == null) {
+                return true;
+            }
+            for (String category : features.getKeys(false)) {
+                ConfigurationSection categorySection = features.getConfigurationSection(category);
+                if (categorySection == null) {
+                    continue;
+                }
+                boolean categoryEnabled = categorySection.getBoolean("enabled", true);
+                ConfigurationSection commands = categorySection.getConfigurationSection("commands");
+                if (commands == null || !commands.contains(name)) {
+                    continue;
+                }
+                boolean commandEnabled = commands.getBoolean(name, true);
+                return categoryEnabled && commandEnabled;
+            }
+            return true;
+        }
+
+        private void sendDisabled(CommandSender sender) {
+            MessageService messages = plugin.getMessages();
+            String raw = messages.getRaw("errors.command-disabled");
+            if (raw == null || raw.isEmpty()) {
+                String prefix = messages.get("prefix");
+                String fallback = messages.colorize("&cBefehl ist deaktiviert.");
+                sender.sendMessage(prefix + fallback);
+                return;
+            }
+            messages.send(sender, "errors.command-disabled");
         }
     }
 }

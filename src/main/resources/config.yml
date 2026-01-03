@@ -29,7 +29,7 @@ back:
   on-death: true
 
 rtp:
-  enabled: true
+  enabled: false
   min-radius: 500
   max-radius: 5000
   max-tries: 20
@@ -55,8 +55,85 @@ chat:
   msg-cooldown-seconds: 1
   mutechat-enabled: true
 
+features:
+  player:
+    enabled: true
+    commands:
+      spawn: true
+      sethome: true
+      home: true
+      delhome: true
+      homes: true
+      back: true
+      tpa: true
+      tpahere: true
+      tpaccept: true
+      tpdeny: true
+      tpacancel: true
+      warp: true
+      setwarp: true
+      delwarp: true
+      warps: true
+      rtp: false
+      msg: true
+      reply: true
+      ignore: true
+      ignorelist: true
+      help: true
+  staff:
+    enabled: true
+    commands:
+      gamemode: true
+      fly: true
+      tp: true
+      tphere: true
+      whois: true
+      info: true
+      heal: true
+      feed: true
+      speed: true
+      invsee: true
+      endersee: true
+      vanish: true
+      vtp: true
+      tpall: true
+      tppos: true
+      clearchat: true
+      socialspy: true
+      menu: true
+      tablist: true
+      motd: true
+  moderation:
+    enabled: true
+    commands:
+      ban: true
+      tempban: true
+      unban: true
+      mute: true
+      tempmute: true
+      unmute: true
+      warn: true
+      unwarn: true
+      clearwarnings: true
+      warnings: true
+      kick: true
+      reasons: true
+      history: true
+      staffhistory: true
+      banlist: true
+      mutechat: true
+  economy:
+    enabled: false
+    commands:
+      balance: true
+      pay: true
+  admin:
+    enabled: true
+    commands:
+      smpcore: true
+
 tablist:
-  enabled: true
+  enabled: false
   update-interval-seconds: 10
   header:
     - "&bSMP-Core"
@@ -66,7 +143,7 @@ tablist:
     - "&7Welt: {world}"
 
 motd:
-  enabled: true
+  enabled: false
   lines:
     - "&bSMP-Core"
     - "&7Willkommen! &8({online}/{max})"
