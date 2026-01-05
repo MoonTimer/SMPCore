@@ -147,10 +147,26 @@ public class DatabaseManager {
                 + "created_at BIGINT NOT NULL"
                 + ")");
 
-        statements.add("CREATE TABLE IF NOT EXISTS economy_balances ("
-                + "uuid VARCHAR(36) PRIMARY KEY,"
-                + "balance DOUBLE NOT NULL,"
-                + "updated_at BIGINT NOT NULL"
+        statements.add("CREATE TABLE IF NOT EXISTS auction_listings ("
+                + "id BIGINT AUTO_INCREMENT PRIMARY KEY,"
+                + "seller_uuid VARCHAR(36),"
+                + "seller_name VARCHAR(16) NOT NULL,"
+                + "item_data LONGTEXT NOT NULL,"
+                + "price DOUBLE NOT NULL,"
+                + "created_at BIGINT NOT NULL,"
+                + "expires_at BIGINT,"
+                + "status VARCHAR(16) NOT NULL,"
+                + "buyer_uuid VARCHAR(36),"
+                + "buyer_name VARCHAR(16),"
+                + "sold_at BIGINT,"
+                + "server_listing BOOLEAN NOT NULL,"
+                + "unlimited BOOLEAN NOT NULL,"
+                + "stock INT NOT NULL,"
+                + "search_text TEXT,"
+                + "sold_cleared BOOLEAN NOT NULL DEFAULT FALSE,"
+                + "updated_at BIGINT NOT NULL,"
+                + "KEY ah_status_created (status, created_at),"
+                + "KEY ah_seller_status (seller_uuid, status)"
                 + ")");
 
         try (Connection connection = getConnection(); Statement statement = connection.createStatement()) {

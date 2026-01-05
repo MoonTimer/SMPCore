@@ -1,6 +1,7 @@
 package me.moontimer.smpcore.listener;
 
 import me.moontimer.smpcore.chat.MuteChatService;
+import me.moontimer.smpcore.core.RankPrefixService;
 import me.moontimer.smpcore.core.MessageService;
 import me.moontimer.smpcore.moderation.PunishmentRecord;
 import me.moontimer.smpcore.moderation.PunishmentService;
@@ -13,11 +14,14 @@ public class ChatListener implements Listener {
     private final PunishmentService punishmentService;
     private final MuteChatService muteChatService;
     private final MessageService messages;
+    private final RankPrefixService rankPrefixService;
 
-    public ChatListener(PunishmentService punishmentService, MuteChatService muteChatService, MessageService messages) {
+    public ChatListener(PunishmentService punishmentService, MuteChatService muteChatService,
+                        MessageService messages, RankPrefixService rankPrefixService) {
         this.punishmentService = punishmentService;
         this.muteChatService = muteChatService;
         this.messages = messages;
+        this.rankPrefixService = rankPrefixService;
     }
 
     @EventHandler
@@ -40,6 +44,16 @@ public class ChatListener implements Listener {
                     .replace("{reason}", mute.reason())
                     .replace("{expires}", expires));
             event.getPlayer().sendMessage(formatted);
+            return;
+        }
+
+        if (event.getPlayer().hasPermission("smpcore.chat.color")) {
+            event.setMessage(messages.colorize(event.getMessage()));
+        }
+
+        String format = rankPrefixService.buildChatFormat(event.getPlayer());
+        if (format != null && !format.isBlank()) {
+            event.setFormat(format);
         }
     }
 }

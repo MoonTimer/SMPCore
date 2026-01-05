@@ -1,9 +1,12 @@
 package me.moontimer.smpcore;
 
+import me.moontimer.smpcore.auction.AuctionMenuListener;
+import me.moontimer.smpcore.auction.AuctionOpenListener;
 import me.moontimer.smpcore.command.*;
 import me.moontimer.smpcore.listener.BackListener;
 import me.moontimer.smpcore.listener.ChatListener;
 import me.moontimer.smpcore.listener.CombatListener;
+import me.moontimer.smpcore.listener.CommandSecurityListener;
 import me.moontimer.smpcore.listener.MotdListener;
 import me.moontimer.smpcore.listener.PlayerConnectionListener;
 import me.moontimer.smpcore.listener.PreLoginListener;
@@ -44,16 +47,21 @@ public class PluginWiring {
         registerListener(new ChatListener(
                 plugin.getPunishmentService(),
                 plugin.getMuteChatService(),
-                plugin.getMessages()
+                plugin.getMessages(),
+                plugin.getRankPrefixService()
         ));
+        registerListener(new CommandSecurityListener(plugin.getMessages()));
         registerListener(new PreLoginListener(plugin.getPunishmentService()));
         registerListener(new MotdListener(plugin, plugin.getMessages()));
         registerListener(new CombatListener(plugin.getCombatService(), plugin.getMessages()));
         registerListener(new MenuListener(plugin.getMenuService()));
+        registerListener(new AuctionMenuListener(plugin.getAuctionMenuService()));
+        registerListener(new AuctionOpenListener(plugin, plugin.getAuctionMenuService()));
     }
 
     private void registerCommands() {
         registerCommand("spawn", new SpawnCommand(plugin, plugin.getMessages(), plugin.getTeleportManager()));
+        registerCommand("setspawn", new SetSpawnCommand(plugin, plugin.getMessages()));
         registerCommand("sethome", new SetHomeCommand(plugin, plugin.getMessages(), plugin.getHomeService()));
         registerCommand("home", new HomeCommand(plugin, plugin.getMessages(), plugin.getHomeService(), plugin.getTeleportManager()));
         registerCommand("delhome", new DelHomeCommand(plugin, plugin.getMessages(), plugin.getHomeService()));
@@ -71,7 +79,7 @@ public class PluginWiring {
         registerCommand("delwarp", new DelWarpCommand(plugin, plugin.getMessages(), plugin.getWarpService()));
         registerCommand("warps", new WarpsCommand(plugin, plugin.getMessages(), plugin.getWarpService()));
 
-        registerCommand("rtp", new RtpCommand(plugin, plugin.getMessages(), plugin.getRtpService(), plugin.getCombatService()));
+        //registerCommand("rtp", new RtpCommand(plugin, plugin.getMessages(), plugin.getRtpService(), plugin.getCombatService()));
 
         registerCommand("msg", new MsgCommand(plugin, plugin.getMessages(), plugin.getChatService(), plugin.getCooldowns()));
         registerCommand("reply", new ReplyCommand(plugin, plugin.getMessages(), plugin.getChatService()));
@@ -114,14 +122,13 @@ public class PluginWiring {
         registerCommand("staffhistory", new StaffHistoryCommand(plugin, plugin.getMessages(), plugin.getPunishmentService()));
         registerCommand("banlist", new BanListCommand(plugin, plugin.getMessages(), plugin.getPunishmentService()));
 
-        registerCommand("balance", new BalanceCommand(plugin, plugin.getMessages(), plugin.getEconomyService()));
-        registerCommand("pay", new PayCommand(plugin, plugin.getMessages(), plugin.getEconomyService()));
-
         registerCommand("help", new HelpCommand(plugin, plugin.getMessages()));
         registerCommand("menu", new MenuCommand(plugin, plugin.getMessages(), plugin.getMenuService()));
         registerCommand("tablist", new TablistCommand(plugin, plugin.getMessages(), plugin.getTablistService()));
         registerCommand("motd", new MotdCommand(plugin, plugin.getMessages()));
         registerCommand("smpcore", new SmpCoreCommand(plugin, plugin.getMessages()));
+        registerCommand("ah", new AuctionCommand(plugin, plugin.getMessages(),
+                plugin.getAuctionService(), plugin.getAuctionMenuService()));
     }
 
     private void registerListener(Listener listener) {
@@ -210,4 +217,3 @@ public class PluginWiring {
         }
     }
 }
-

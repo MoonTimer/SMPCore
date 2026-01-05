@@ -2,12 +2,23 @@ name: SMPCore
 version: '1.0-SNAPSHOT'
 main: me.moontimer.smpcore.SmpCorePlugin
 api-version: '1.21'
+author: MoonTimer
+load: STARTUP
+loadbefore:
+  - EssentialsX
+  - EssentialsChat
+  - EssentialsProtext
+softdepend: [Vault, LuckPerms]
 
 commands:
   spawn:
     description: Teleportiere dich zum Spawn.
     usage: /spawn
     permission: smpcore.spawn.use
+  setspawn:
+    description: Setze den Spawnpunkt.
+    usage: /setspawn
+    permission: smpcore.spawn.set
   sethome:
     description: Setze ein Zuhause.
     usage: /sethome [name]
@@ -17,7 +28,7 @@ commands:
     usage: /home [name]
     permission: smpcore.home.use
   delhome:
-    description: Loesche ein Zuhause.
+    description: Lösche ein Zuhause.
     usage: /delhome <name>
     permission: smpcore.home.delete
   homes:
@@ -25,7 +36,7 @@ commands:
     usage: /homes
     permission: smpcore.home.list
   back:
-    description: Zurueck zur letzten Position.
+    description: Zurück zur letzten Position.
     usage: /back
     permission: smpcore.back.use
   tpa:
@@ -57,17 +68,17 @@ commands:
     usage: /setwarp <name>
     permission: smpcore.warp.set
   delwarp:
-    description: Loesche einen Warp.
+    description: Lösche einen Warp.
     usage: /delwarp <name>
     permission: smpcore.warp.delete
   warps:
     description: Liste der Warps.
     usage: /warps
     permission: smpcore.warp.list
-  rtp:
-    description: Zufallsteleport.
-    usage: /rtp [world]
-    permission: smpcore.rtp.use
+#  rtp:
+#    description: Zufallsteleport.
+#    usage: /rtp [world]
+#    permission: smpcore.rtp.use
   msg:
     description: Private Nachricht senden.
     usage: /msg <player> <message>
@@ -95,7 +106,7 @@ commands:
     usage: /mutechat [duration] [reason]
     permission: smpcore.mod.mutechat
   gamemode:
-    description: Gamemode aendern.
+    description: Gamemode ändern.
     usage: /gamemode <0|1|2|3> [player]
     aliases: [gm, gms, gmc, gma, gmsp]
     permission: smpcore.staff.gamemode
@@ -124,7 +135,7 @@ commands:
     usage: /heal [player]
     permission: smpcore.staff.heal
   feed:
-    description: Spieler fuettern.
+    description: Spieler füttern.
     usage: /feed [player]
     permission: smpcore.staff.feed
   speed:
@@ -132,11 +143,11 @@ commands:
     usage: /speed <0-10> [player]
     permission: smpcore.staff.speed
   invsee:
-    description: Inventar eines Spielers oeffnen.
+    description: Inventar eines Spielers öffnen.
     usage: /invsee <player>
     permission: smpcore.staff.invsee
   endersee:
-    description: Endertruhe eines Spielers oeffnen.
+    description: Endertruhe eines Spielers öffnen.
     usage: /endersee <player>
     permission: smpcore.staff.endersee
   vanish:
@@ -204,7 +215,7 @@ commands:
     usage: /kick <player> [reason]
     permission: smpcore.mod.kick
   reasons:
-    description: Vorgefertigte Ban- und Mute-Gruende anzeigen.
+    description: Vorgefertigte Ban- und Mute-Gründe anzeigen.
     usage: /reasons [ban|mute]
     permission: smpcore.mod.reasons
   history:
@@ -219,19 +230,11 @@ commands:
     description: Aktive Bans anzeigen.
     usage: /banlist [page]
     permission: smpcore.mod.history
-  balance:
-    description: Kontostand anzeigen.
-    usage: /balance
-    permission: smpcore.economy.balance
-  pay:
-    description: Geld senden.
-    usage: /pay <player> <amount>
-    permission: smpcore.economy.pay
   help:
     description: SMP-Core Hilfe.
     usage: /help
   menu:
-    description: Staff Menu oeffnen.
+    description: Staff Menu öffnen.
     usage: /menu [player]
     permission: smpcore.staff.menu
   tablist:
@@ -246,10 +249,17 @@ commands:
     description: SMP-Core Admin.
     usage: /smpcore <reload|migrate>
     permission: smpcore.admin
+  ah:
+    description: Auktionshaus.
+    usage: /ah [help|search|sell|list|ulist|selling|sold|expired|cancel|return]
+    aliases: [auctionhouse]
+    permission: smpcore.auctionhouse.open
 
 permissions:
   smpcore.spawn.use:
     default: true
+  smpcore.spawn.set:
+    default: op
   smpcore.home.sethome:
     default: true
   smpcore.home.use:
@@ -274,6 +284,12 @@ permissions:
     default: true
   smpcore.msg.use:
     default: true
+  smpcore.chat.color:
+    default: false
+  smpcore.command.plugins:
+    default: op
+  smpcore.tabcomplete.bypass:
+    default: op
   smpcore.reply.use:
     default: true
   smpcore.ignore.use:
@@ -370,14 +386,31 @@ permissions:
     default: op
   smpcore.mod.mutechat:
     default: op
-  smpcore.economy.balance:
-    default: true
-  smpcore.economy.pay:
-    default: true
   smpcore.config.reload:
     default: op
   smpcore.db.migrate:
     default: op
   smpcore.admin:
     default: op
-
+  smpcore.auctionhouse.open:
+    default: true
+  smpcore.auctionhouse.sell:
+    default: true
+  smpcore.auctionhouse.search:
+    default: true
+  smpcore.auctionhouse.selling:
+    default: true
+  smpcore.auctionhouse.sold:
+    default: true
+  smpcore.auctionhouse.expired:
+    default: true
+  smpcore.auctionhouse.cancel:
+    default: true
+  smpcore.auctionhouse.return:
+    default: true
+  smpcore.auctionhouse.server:
+    default: op
+  smpcore.auctionhouse.show:
+    default: op
+  smpcore.auctionhouse.reload:
+    default: op

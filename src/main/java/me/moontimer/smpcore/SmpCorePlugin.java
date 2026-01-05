@@ -2,6 +2,8 @@ package me.moontimer.smpcore;
 
 import java.util.Objects;
 import me.moontimer.smpcore.audit.AuditService;
+import me.moontimer.smpcore.auction.AuctionMenuService;
+import me.moontimer.smpcore.auction.AuctionService;
 import me.moontimer.smpcore.chat.ChatService;
 import me.moontimer.smpcore.chat.IgnoreService;
 import me.moontimer.smpcore.chat.MuteChatService;
@@ -9,9 +11,9 @@ import me.moontimer.smpcore.chat.SocialSpyService;
 import me.moontimer.smpcore.combat.CombatService;
 import me.moontimer.smpcore.core.MessageService;
 import me.moontimer.smpcore.core.PlayerService;
+import me.moontimer.smpcore.core.RankPrefixService;
 import me.moontimer.smpcore.core.TablistService;
 import me.moontimer.smpcore.db.DatabaseManager;
-import me.moontimer.smpcore.economy.EconomyService;
 import me.moontimer.smpcore.menu.StaffMenuService;
 import me.moontimer.smpcore.moderation.PunishmentService;
 import me.moontimer.smpcore.rtp.RtpService;
@@ -23,6 +25,7 @@ import me.moontimer.smpcore.teleport.TeleportManager;
 import me.moontimer.smpcore.teleport.TpaService;
 import me.moontimer.smpcore.teleport.WarmupManager;
 import me.moontimer.smpcore.teleport.WarpService;
+import me.moontimer.smpcore.vault.VaultEconomyService;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SmpCorePlugin extends JavaPlugin {
@@ -46,9 +49,12 @@ public final class SmpCorePlugin extends JavaPlugin {
     private MuteChatService muteChatService;
 
     private PunishmentService punishmentService;
-    private EconomyService economyService;
+    private VaultEconomyService vaultEconomy;
+    private AuctionService auctionService;
+    private AuctionMenuService auctionMenuService;
     private RtpService rtpService;
     private PlayerService playerService;
+    private RankPrefixService rankPrefixService;
     private TablistService tablistService;
     private VanishService vanishService;
     private CombatService combatService;
@@ -59,6 +65,7 @@ public final class SmpCorePlugin extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
         messages = new MessageService(this);
+        rankPrefixService = new RankPrefixService(this, messages);
 
         database = new DatabaseManager(this);
         if (!database.initialize()) {
@@ -84,9 +91,15 @@ public final class SmpCorePlugin extends JavaPlugin {
 
         playerService = new PlayerService(this, database);
         punishmentService = new PunishmentService(this, database, audit, messages);
-        economyService = new EconomyService(database, audit, this);
+        vaultEconomy = new VaultEconomyService(this);
+        if (!vaultEconomy.isAvailable()) {
+            getLogger().warning("Vault Economy nicht gefunden. Auktionshaus-Transaktionen sind deaktiviert.");
+        }
+        auctionService = new AuctionService(this, database, vaultEconomy, audit);
+        auctionMenuService = new AuctionMenuService(this, messages, auctionService);
+        auctionService.startCleanupTask();
         rtpService = new RtpService(this, messages, teleportManager, audit);
-        tablistService = new TablistService(this, messages);
+        tablistService = new TablistService(this, messages, rankPrefixService);
         tablistService.start();
         vanishService = new VanishService(this);
         combatService = new CombatService(this);
@@ -104,6 +117,9 @@ public final class SmpCorePlugin extends JavaPlugin {
         }
         if (tablistService != null) {
             tablistService.stop();
+        }
+        if (auctionService != null) {
+            auctionService.stopCleanupTask();
         }
     }
 
@@ -171,8 +187,16 @@ public final class SmpCorePlugin extends JavaPlugin {
         return punishmentService;
     }
 
-    public EconomyService getEconomyService() {
-        return economyService;
+    public AuctionService getAuctionService() {
+        return auctionService;
+    }
+
+    public AuctionMenuService getAuctionMenuService() {
+        return auctionMenuService;
+    }
+
+    public VaultEconomyService getVaultEconomy() {
+        return vaultEconomy;
     }
 
     public RtpService getRtpService() {
@@ -185,6 +209,10 @@ public final class SmpCorePlugin extends JavaPlugin {
 
     public TablistService getTablistService() {
         return tablistService;
+    }
+
+    public RankPrefixService getRankPrefixService() {
+        return rankPrefixService;
     }
 
     public VanishService getVanishService() {

@@ -12,16 +12,20 @@ import org.bukkit.scheduler.BukkitTask;
 public class TablistService {
     private final Plugin plugin;
     private final MessageService messages;
+    private final RankPrefixService rankPrefixService;
     private BukkitTask task;
 
-    public TablistService(Plugin plugin, MessageService messages) {
+    public TablistService(Plugin plugin, MessageService messages, RankPrefixService rankPrefixService) {
         this.plugin = plugin;
         this.messages = messages;
+        this.rankPrefixService = rankPrefixService;
     }
 
     public void start() {
         stop();
-        if (!plugin.getConfig().getBoolean("tablist.enabled", true)) {
+        boolean headerEnabled = plugin.getConfig().getBoolean("tablist.enabled", true);
+        boolean prefixEnabled = rankPrefixService.isTabPrefixEnabled();
+        if (!headerEnabled && !prefixEnabled) {
             return;
         }
         int interval = Math.max(2, plugin.getConfig().getInt("tablist.update-interval-seconds", 10));
@@ -41,28 +45,39 @@ public class TablistService {
     }
 
     public void updateAll() {
-        if (!plugin.getConfig().getBoolean("tablist.enabled", true)) {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                player.setPlayerListHeaderFooter("", "");
-            }
-            return;
-        }
+        boolean headerEnabled = plugin.getConfig().getBoolean("tablist.enabled", true);
+        boolean prefixEnabled = rankPrefixService.isTabPrefixEnabled();
         for (Player player : Bukkit.getOnlinePlayers()) {
-            updatePlayer(player);
+            updatePlayer(player, headerEnabled, prefixEnabled);
         }
     }
 
     public void updatePlayer(Player player) {
-        if (!plugin.getConfig().getBoolean("tablist.enabled", true)) {
+        boolean headerEnabled = plugin.getConfig().getBoolean("tablist.enabled", true);
+        boolean prefixEnabled = rankPrefixService.isTabPrefixEnabled();
+        updatePlayer(player, headerEnabled, prefixEnabled);
+    }
+
+    private void updatePlayer(Player player, boolean headerEnabled, boolean prefixEnabled) {
+        if (headerEnabled) {
+            List<String> headerLines = plugin.getConfig().getStringList("tablist.header");
+            List<String> footerLines = plugin.getConfig().getStringList("tablist.footer");
+            Map<String, String> placeholders = buildPlaceholders(player);
+            String header = formatLines(headerLines, placeholders);
+            String footer = formatLines(footerLines, placeholders);
+            player.setPlayerListHeaderFooter(header, footer);
+        } else {
             player.setPlayerListHeaderFooter("", "");
-            return;
         }
-        List<String> headerLines = plugin.getConfig().getStringList("tablist.header");
-        List<String> footerLines = plugin.getConfig().getStringList("tablist.footer");
-        Map<String, String> placeholders = buildPlaceholders(player);
-        String header = formatLines(headerLines, placeholders);
-        String footer = formatLines(footerLines, placeholders);
-        player.setPlayerListHeaderFooter(header, footer);
+        if (prefixEnabled) {
+            String name = rankPrefixService.buildTabName(player);
+            if (name == null || name.isBlank()) {
+                name = player.getName();
+            }
+            player.setPlayerListName(name);
+        } else {
+            player.setPlayerListName(player.getName());
+        }
     }
 
     private Map<String, String> buildPlaceholders(Player player) {

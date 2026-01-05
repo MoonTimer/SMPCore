@@ -27,6 +27,9 @@ public class SmpCoreCommand extends BaseCommand {
                 }
                 core.reloadConfig();
                 core.getMessages().reload();
+                if (core.getRankPrefixService() != null) {
+                    core.getRankPrefixService().reload();
+                }
                 if (core.getTablistService() != null) {
                     core.getTablistService().reload();
                 }

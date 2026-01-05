@@ -1,9 +1,9 @@
 mysql:
-  host: "localhost"
+  host: "node1.xerohosting.org"
   port: 3306
-  database: "smpcore"
-  user: "root"
-  password: ""
+  database: "s48_SMP"
+  user: "u48_8aCi7rhPkX"
+  password: ".E!M2JczFv6wAgJDShNgRADo"
   use-ssl: false
   pool:
     maximum-pool-size: 10
@@ -51,9 +51,36 @@ combat:
   quit-kill: true
 
 chat:
+  format: "{prefix}{player}&7: {message}"
   msg-format: "&7Moontimer -+ {sender} -> {target}: {message}"
   msg-cooldown-seconds: 1
   mutechat-enabled: true
+
+rank-prefix:
+  enabled: true
+  use-luckperms: true
+  use-luckperms-prefix: true
+  default-group: "spieler"
+  default-prefix: "&7Spieler &7| "
+  groups:
+    admin:
+      prefix: "&4Admin &7| "
+      name: "Admin"
+    developer:
+      prefix: "&bDeveloper &7| "
+      name: "Developer"
+    moderator:
+      prefix: "&2Moderator &7| "
+      name: "Moderator"
+    supporter:
+      prefix: "&aSupporter &7| "
+      name: "Supporter"
+    hero:
+      prefix: "&6Hero &7| "
+      name: "Hero"
+    spieler:
+      prefix: "&7Spieler &7| "
+      name: "Spieler"
 
 features:
   player:
@@ -83,6 +110,7 @@ features:
   staff:
     enabled: true
     commands:
+      setspawn: true
       gamemode: true
       fly: true
       tp: true
@@ -122,11 +150,10 @@ features:
       staffhistory: true
       banlist: true
       mutechat: true
-  economy:
-    enabled: false
+  auctionhouse:
+    enabled: true
     commands:
-      balance: true
-      pay: true
+      ah: true
   admin:
     enabled: true
     commands:
@@ -134,6 +161,8 @@ features:
 
 tablist:
   enabled: false
+  prefix-enabled: false
+  name-format: "{prefix}{player}"
   update-interval-seconds: 10
   header:
     - "&bSMP-Core"
@@ -180,11 +209,114 @@ staff-menu:
     - "Beleidigung"
     - "Provokation"
 
-economy:
-  enabled: false
-  start-balance: 0.0
-  minimum-pay: 1.0
+auctionhouse:
+  enabled: true
+  min-price: 1.0
+  max-price: 1000000.0
+  listing-duration-hours: 72
+  expire-server-listings: false
+  server-account-uuid: "00000000-0000-0000-0000-000000000000"
+  fees:
+    listing:
+      flat: 0.0
+      percent: 0.0
+    sale-tax:
+      percent: 0.0
+      cap: 0.0
+  announce:
+    enabled: false
+  logging:
+    enabled: true
+    file-path: "logs/auctionhouse.log"
+  cleanup:
+    enabled: true
+    interval-seconds: 300
+    retention-days: 7
+  return:
+    drop-at-feet: true
+  menu:
+    size: 54
+    default-sort: "time"
+    back-command: ""
+    filler: "GRAY_STAINED_GLASS_PANE"
+    buttons:
+      previous:
+        material: "ARROW"
+      next:
+        material: "ARROW"
+      sort:
+        material: "HOPPER"
+      selling:
+        material: "player_head"
+      sold:
+        material: "EMERALD"
+      expired:
+        material: "BARRIER"
+      back:
+        material: "BARRIER"
+      clear:
+        material: "LAVA_BUCKET"
+      confirm:
+        material: "LIME_WOOL"
+      cancel:
+        material: "RED_WOOL"
+  sounds:
+    open:
+      sound: "BLOCK_CHEST_OPEN"
+      volume: 1.0
+      pitch: 1.0
+    buy:
+      sound: "ENTITY_PLAYER_LEVELUP"
+      volume: 1.0
+      pitch: 1.0
+    error:
+      sound: "ENTITY_VILLAGER_NO"
+      volume: 1.0
+      pitch: 1.0
+    list:
+      sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+      volume: 1.0
+      pitch: 1.0
+  openers:
+    sign:
+      enabled: false
+      lines:
+        - "[Auktion]"
+        - ""
+        - ""
+        - ""
+    blocks:
+      enabled: false
+      names:
+        - "Auktionshaus"
+      types:
+        - "CHEST"
+        - "TRAPPED_CHEST"
+        - "ENDER_CHEST"
+        - "SHULKER_BOX"
+        - "BARREL"
+        - "DISPENSER"
+        - "DROPPER"
+        - "HOPPER"
+        - "FURNACE"
+        - "BLAST_FURNACE"
+        - "SMOKER"
+        - "ENCHANTING_TABLE"
+        - "BREWING_STAND"
+    entities:
+      enabled: false
+      names:
+        - "Auktionshaus"
+  restrictions:
+    enabled: false
+    rules:
+      - name: "regex:.*Soulbound.*"
+        reason: "Soulbound-Items sind gesperrt."
+      - enchants:
+          - "minecraft:vanishing_curse"
+          - "minecraft:binding_curse"
+        reason: "Verfluchte Items sind gesperrt."
 
 audit:
-  file-enabled: false
+  file-enabled: true
   file-path: "logs/smpcore-audit.log"
