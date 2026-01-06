@@ -1,0 +1,38 @@
+name: SMPCore-AH
+version: '${project.version}'
+main: me.moontimer.smpcore.SmpCoreAuctionPlugin
+api-version: '1.21'
+author: MoonTimer
+depend: [SMPCore]
+softdepend: [Vault]
+
+commands:
+  ah:
+    description: Auktionshaus.
+    usage: /ah [help|search|sell|list|ulist|selling|sold|expired|cancel|return]
+    aliases: [auctionhouse]
+    permission: smpcore.auctionhouse.open
+
+permissions:
+  smpcore.auctionhouse.open:
+    default: true
+  smpcore.auctionhouse.sell:
+    default: true
+  smpcore.auctionhouse.search:
+    default: true
+  smpcore.auctionhouse.selling:
+    default: true
+  smpcore.auctionhouse.sold:
+    default: true
+  smpcore.auctionhouse.expired:
+    default: true
+  smpcore.auctionhouse.cancel:
+    default: true
+  smpcore.auctionhouse.return:
+    default: true
+  smpcore.auctionhouse.server:
+    default: op
+  smpcore.auctionhouse.show:
+    default: op
+  smpcore.auctionhouse.reload:
+    default: op

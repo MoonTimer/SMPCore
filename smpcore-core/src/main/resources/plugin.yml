@@ -1,0 +1,28 @@
+name: SMPCore
+version: '${project.version}'
+main: me.moontimer.smpcore.SmpCorePlugin
+api-version: '1.21'
+author: MoonTimer
+load: STARTUP
+loadbefore:
+  - EssentialsX
+  - EssentialsChat
+  - EssentialsProtext
+
+commands:
+  smpcore:
+    description: SMP-Core Admin.
+    usage: /smpcore <reload|migrate>
+    permission: smpcore.admin
+
+permissions:
+  smpcore.command.plugins:
+    default: op
+  smpcore.tabcomplete.bypass:
+    default: op
+  smpcore.config.reload:
+    default: op
+  smpcore.db.migrate:
+    default: op
+  smpcore.admin:
+    default: op

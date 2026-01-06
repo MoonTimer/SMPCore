@@ -1,0 +1,147 @@
+name: SMPCore-Player
+version: '${project.version}'
+main: me.moontimer.smpcore.SmpCorePlayerPlugin
+api-version: '1.21'
+author: MoonTimer
+depend: [SMPCore]
+
+commands:
+  spawn:
+    description: Teleportiere dich zum Spawn.
+    usage: /spawn
+    permission: smpcore.spawn.use
+  sethome:
+    description: Setze ein Zuhause.
+    usage: /sethome [name]
+    permission: smpcore.home.sethome
+  home:
+    description: Teleportiere dich zu einem Zuhause.
+    usage: /home [name]
+    permission: smpcore.home.use
+  delhome:
+    description: Loesche ein Zuhause.
+    usage: /delhome <name>
+    permission: smpcore.home.delete
+  homes:
+    description: Liste deiner Homes.
+    usage: /homes
+    permission: smpcore.home.list
+  back:
+    description: Zurueck zur letzten Position.
+    usage: /back
+    permission: smpcore.back.use
+  tpa:
+    description: Teleport-Anfrage senden.
+    usage: /tpa <player>
+    permission: smpcore.tpa.send
+  tpahere:
+    description: Spieler zu dir einladen.
+    usage: /tpahere <player>
+    permission: smpcore.tpa.here
+  tpaccept:
+    description: Teleport-Anfrage annehmen.
+    usage: /tpaccept [player]
+    permission: smpcore.tpa.accept
+  tpdeny:
+    description: Teleport-Anfrage ablehnen.
+    usage: /tpdeny [player]
+    permission: smpcore.tpa.deny
+  tpacancel:
+    description: Eigene Anfrage abbrechen.
+    usage: /tpacancel
+    permission: smpcore.tpa.cancel
+  warp:
+    description: Teleportiere dich zu einem Warp.
+    usage: /warp <name>
+    permission: smpcore.warp.use
+  setwarp:
+    description: Setze einen Warp.
+    usage: /setwarp <name>
+    permission: smpcore.warp.set
+  delwarp:
+    description: Loesche einen Warp.
+    usage: /delwarp <name>
+    permission: smpcore.warp.delete
+  warps:
+    description: Liste der Warps.
+    usage: /warps
+    permission: smpcore.warp.list
+  rtp:
+    description: Zufallsteleport.
+    usage: /rtp [world]
+    permission: smpcore.rtp.use
+  msg:
+    description: Private Nachricht senden.
+    usage: /msg <player> <message>
+    aliases: [tell, w]
+    permission: smpcore.msg.use
+  reply:
+    description: Auf letzte Nachricht antworten.
+    usage: /reply <message>
+    aliases: [r]
+    permission: smpcore.reply.use
+  ignore:
+    description: Spieler ignorieren.
+    usage: /ignore <player>
+    permission: smpcore.ignore.use
+  ignorelist:
+    description: Ignorierte Spieler anzeigen.
+    usage: /ignorelist
+    permission: smpcore.ignore.use
+  help:
+    description: SMP-Core Hilfe.
+    usage: /help
+
+permissions:
+  smpcore.spawn.use:
+    default: true
+  smpcore.home.sethome:
+    default: true
+  smpcore.home.use:
+    default: true
+  smpcore.home.delete:
+    default: true
+  smpcore.home.list:
+    default: true
+  smpcore.tpa.send:
+    default: true
+  smpcore.tpa.here:
+    default: true
+  smpcore.tpa.accept:
+    default: true
+  smpcore.tpa.deny:
+    default: true
+  smpcore.tpa.cancel:
+    default: true
+  smpcore.back.use:
+    default: true
+  smpcore.rtp.use:
+    default: true
+  smpcore.msg.use:
+    default: true
+  smpcore.chat.color:
+    default: false
+  smpcore.reply.use:
+    default: true
+  smpcore.ignore.use:
+    default: true
+  smpcore.warp.use:
+    default: true
+  smpcore.warp.list:
+    default: true
+  smpcore.warp.set:
+    default: op
+  smpcore.warp.delete:
+    default: op
+  smpcore.home.limit.*:
+    default: false
+  smpcore.tpa.cooldown.bypass:
+    default: op
+  smpcore.rtp.cooldown.bypass:
+    default: op
+  smpcore.rtp.world.*:
+    default: op
+  smpcore.teleport.bypass.warmup:
+    default: op
+  smpcore.combat.bypass:
+    default: op

@@ -1,0 +1,17 @@
+name: SMPCore-Prefix
+version: '${project.version}'
+main: me.moontimer.smpcore.SmpCorePrefixPlugin
+api-version: '1.21'
+author: MoonTimer
+depend: [SMPCore]
+softdepend: [LuckPerms]
+
+commands:
+  tablist:
+    description: Tablist bearbeiten.
+    usage: /tablist <setheader|setfooter|reload> <text>
+    permission: smpcore.staff.tablist
+
+permissions:
+  smpcore.staff.tablist:
+    default: op

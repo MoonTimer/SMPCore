@@ -1,0 +1,229 @@
+name: SMPCore-Staff
+version: '${project.version}'
+main: me.moontimer.smpcore.SmpCoreStaffPlugin
+api-version: '1.21'
+author: MoonTimer
+depend: [SMPCore, SMPCore-Prefix]
+
+commands:
+  setspawn:
+    description: Setze den Spawnpunkt.
+    usage: /setspawn
+    permission: smpcore.spawn.set
+  gamemode:
+    description: Gamemode aendern.
+    usage: /gamemode <0|1|2|3> [player]
+    aliases: [gm, gms, gmc, gma, gmsp]
+    permission: smpcore.staff.gamemode
+  fly:
+    description: Flugmodus umschalten.
+    usage: /fly [player]
+    permission: smpcore.fly.self
+  tp:
+    description: Zu einem Spieler teleportieren.
+    usage: /tp <player> | /tp <x> <y> <z> [world]
+    permission: smpcore.staff.tp
+  tphere:
+    description: Spieler zu dir teleportieren.
+    usage: /tphere <player>
+    permission: smpcore.staff.tphere
+  whois:
+    description: Spielerinfos anzeigen.
+    usage: /whois <player>
+    permission: smpcore.staff.whois
+  info:
+    description: Staff-Info zu einem Spieler.
+    usage: /info <player>
+    permission: smpcore.staff.info
+  heal:
+    description: Spieler heilen.
+    usage: /heal [player]
+    permission: smpcore.staff.heal
+  feed:
+    description: Spieler fuettern.
+    usage: /feed [player]
+    permission: smpcore.staff.feed
+  speed:
+    description: Lauf-/Fluggeschwindigkeit setzen.
+    usage: /speed <0-10> [player]
+    permission: smpcore.staff.speed
+  invsee:
+    description: Inventar eines Spielers oeffnen.
+    usage: /invsee <player>
+    permission: smpcore.staff.invsee
+  endersee:
+    description: Endertruhe eines Spielers oeffnen.
+    usage: /endersee <player>
+    permission: smpcore.staff.endersee
+  vanish:
+    description: Vanish umschalten.
+    usage: /vanish [player]
+    permission: smpcore.staff.vanish
+  vtp:
+    description: Vanish + Teleport zu Spieler.
+    usage: /vtp <player>
+    permission: smpcore.staff.vtp
+  tpall:
+    description: Alle Spieler zu dir teleportieren.
+    usage: /tpall
+    permission: smpcore.staff.tpall
+  tppos:
+    description: Teleport zu Koordinaten.
+    usage: /tppos <x> <y> <z> [world]
+    permission: smpcore.staff.tppos
+  clearchat:
+    description: Chat leeren.
+    usage: /clearchat
+    permission: smpcore.staff.clearchat
+  socialspy:
+    description: SocialSpy umschalten.
+    usage: /socialspy
+    permission: smpcore.staff.socialspy
+  mutechat:
+    description: Globalen Chat muten.
+    usage: /mutechat [duration] [reason]
+    permission: smpcore.mod.mutechat
+  ban:
+    description: Spieler bannen.
+    usage: /ban <player> [reason] [-s]
+    permission: smpcore.mod.ban
+  tempban:
+    description: Spieler tempbannen.
+    usage: /tempban <player> <duration> [reason] [-s]
+    permission: smpcore.mod.tempban
+  unban:
+    description: Spieler entbannen.
+    usage: /unban <player>
+    permission: smpcore.mod.unban
+  mute:
+    description: Spieler muten.
+    usage: /mute <player> [reason] [-s]
+    permission: smpcore.mod.mute
+  tempmute:
+    description: Spieler tempmuten.
+    usage: /tempmute <player> <duration> [reason] [-s]
+    permission: smpcore.mod.tempmute
+  unmute:
+    description: Spieler entmuten.
+    usage: /unmute <player>
+    permission: smpcore.mod.unmute
+  warn:
+    description: Spieler verwarnen.
+    usage: /warn <player> <reason>
+    permission: smpcore.mod.warn
+  unwarn:
+    description: Letzte Verwarnung entfernen.
+    usage: /unwarn <player>
+    permission: smpcore.mod.warn
+  clearwarnings:
+    description: Alle Verwarnungen entfernen.
+    usage: /clearwarnings <player>
+    permission: smpcore.mod.warn
+  warnings:
+    description: Verwarnungen anzeigen.
+    usage: /warnings <player> [page]
+    permission: smpcore.mod.history
+  kick:
+    description: Spieler kicken.
+    usage: /kick <player> [reason]
+    permission: smpcore.mod.kick
+  reasons:
+    description: Vorgefertigte Ban- und Mute-Gruende anzeigen.
+    usage: /reasons [ban|mute]
+    permission: smpcore.mod.reasons
+  history:
+    description: Verlauf eines Spielers anzeigen.
+    usage: /history <player> [page]
+    permission: smpcore.mod.history
+  staffhistory:
+    description: Verlauf eines Staffs anzeigen.
+    usage: /staffhistory <staff> [page]
+    permission: smpcore.mod.history
+  banlist:
+    description: Aktive Bans anzeigen.
+    usage: /banlist [page]
+    permission: smpcore.mod.history
+  menu:
+    description: Staff Menu oeffnen.
+    usage: /menu [player]
+    permission: smpcore.staff.menu
+  motd:
+    description: MOTD bearbeiten.
+    usage: /motd <set|reload> <text>
+    permission: smpcore.staff.motd
+
+permissions:
+  smpcore.spawn.set:
+    default: op
+  smpcore.fly.self:
+    default: false
+  smpcore.staff.fly:
+    default: op
+    children:
+      smpcore.fly.self: true
+  smpcore.staff.gamemode:
+    default: op
+  smpcore.staff.heal:
+    default: op
+  smpcore.staff.feed:
+    default: op
+  smpcore.staff.speed:
+    default: op
+  smpcore.staff.tp:
+    default: op
+  smpcore.staff.tphere:
+    default: op
+  smpcore.staff.whois:
+    default: op
+  smpcore.staff.info:
+    default: op
+  smpcore.staff.socialspy:
+    default: op
+  smpcore.staff.menu:
+    default: op
+  smpcore.staff.notify:
+    default: op
+  smpcore.staff.invsee:
+    default: op
+  smpcore.staff.endersee:
+    default: op
+  smpcore.staff.vanish:
+    default: op
+  smpcore.staff.vanish.others:
+    default: op
+  smpcore.staff.vanish.see:
+    default: op
+  smpcore.staff.vtp:
+    default: op
+  smpcore.staff.tpall:
+    default: op
+  smpcore.staff.tppos:
+    default: op
+  smpcore.staff.clearchat:
+    default: op
+  smpcore.staff.motd:
+    default: op
+  smpcore.chat.color:
+    default: false
+  smpcore.mod.ban:
+    default: op
+  smpcore.mod.tempban:
+    default: op
+  smpcore.mod.unban:
+    default: op
+  smpcore.mod.mute:
+    default: op
+  smpcore.mod.tempmute:
+    default: op
+  smpcore.mod.unmute:
+    default: op
+  smpcore.mod.warn:
+    default: op
+  smpcore.mod.kick:
+    default: op
+  smpcore.mod.reasons:
+    default: op
+  smpcore.mod.history:
+    default: op
+  smpcore.mod.mutechat:
+    default: op
