@@ -1,9 +1,9 @@
 mysql:
-  host: "node1.xerohosting.org"
+  host: ""
   port: 3306
-  database: "s48_SMP"
-  user: "u48_8aCi7rhPkX"
-  password: ".E!M2JczFv6wAgJDShNgRADo"
+  database: ""
+  user: ""
+  password: ""
   use-ssl: false
   pool:
     maximum-pool-size: 10

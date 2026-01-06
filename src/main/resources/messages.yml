@@ -2,14 +2,14 @@ prefix: "&8[&bSMP&fCore&8] &7"
 
 errors:
   no-permission: "&cDazu hast du keine Berechtigung."
-  player-only: "&cNur Spieler k÷nnen diesen Befehl nutzen."
+  player-only: "&cNur Spieler k√∂nnen diesen Befehl nutzen."
   player-not-found: "&cSpieler nicht gefunden."
   target-offline: "&cDer Spieler ist offline."
   invalid-args: "&cBenutzung: {usage}"
   on-cooldown: "&cBitte warte {time}."
   warmup-start: "&7Teleport in {time}s. Bitte nicht bewegen."
   warmup-cancelled: "&cTeleport abgebrochen."
-  no-back: "&cKein R‹cksetzpunkt vorhanden."
+  no-back: "&cKein R√ºcksetzpunkt vorhanden."
   home-not-found: "&cHome nicht gefunden."
   home-limit: "&cHome-Limit erreicht ({limit})."
   warp-not-found: "&cWarp nicht gefunden."
@@ -18,7 +18,7 @@ errors:
   command-disabled: "&cDieser Befehl ist deaktiviert."
   cannot-message: "&cDu kannst diesem Spieler nicht schreiben."
   muted: "&cDu bist gemutet."
-  global-muted: "&cDer Chat ist akt‹ll stummgeschaltet."
+  global-muted: "&cDer Chat ist aktuell stummgeschaltet."
   in-combat: "&cDu bist im Kampf. Warte {time}."
 
 chat:
@@ -27,14 +27,14 @@ chat:
 teleport:
   spawn: "&aZum Spawn teleportiert."
   spawn-set: "&aSpawn gesetzt."
-  back: "&aZur‹ck teleportiert."
+  back: "&aZur√ºck teleportiert."
   home-set: "&aHome {home} gesetzt."
-  home-deleted: "&aHome {home} gel÷scht."
+  home-deleted: "&aHome {home} gel√∂scht."
   home-teleport: "&aZu Home {home} teleportiert."
   homes-list: "&7Homes ({count}): {homes}"
   warps-list: "&7Warps ({count}): {warps}"
   warp-set: "&aWarp {warp} gesetzt."
-  warp-deleted: "&aWarp {warp} gel÷scht."
+  warp-deleted: "&aWarp {warp} gel√∂scht."
   warp-teleport: "&aZu Warp {warp} teleportiert."
 
 rtp:
@@ -78,31 +78,31 @@ mutechat:
 
 moderation:
   ban: "&c{target} wurde gebannt. ID: {id}"
-  tempban: "&c{target} wurde f‹r {duration} gebannt. ID: {id}"
+  tempban: "&c{target} wurde f√ºr {duration} gebannt. ID: {id}"
   unban: "&a{target} wurde entbannt."
   mute: "&c{target} wurde gemutet. ID: {id}"
-  tempmute: "&c{target} wurde f‹r {duration} gemutet. ID: {id}"
+  tempmute: "&c{target} wurde f√ºr {duration} gemutet. ID: {id}"
   unmute: "&a{target} wurde entmutet."
   warn: "&e{target} verwarnt. ID: {id}"
-  unwarn: "&aLetzte Verwarnung entfernt f‹r {target}."
-  clearwarnings: "&aAlle Verwarnungen entfernt f‹r {target}."
+  unwarn: "&aLetzte Verwarnung entfernt f√ºr {target}."
+  clearwarnings: "&aAlle Verwarnungen entfernt f√ºr {target}."
   kick: "&c{target} wurde gekickt."
-  history-header: "&7Verlauf f‹r {target} (Seite {page}/{pages}):"
+  history-header: "&7Verlauf f√ºr {target} (Seite {page}/{pages}):"
   staffhistory-header: "&7Verlauf von {staff} (Seite {page}/{pages}):"
   banlist-header: "&7Aktive Bans (Seite {page}/{pages}):"
-  warnings-header: "&7Warnungen f‹r {target} (Seite {page}/{pages}):"
+  warnings-header: "&7Warnungen f√ºr {target} (Seite {page}/{pages}):"
   history-line: "&7#{id} {type} {reason} {created} {expires}"
-  no-history: "&7Keine Eintrƒge."
-  reasons-header: "&7Vorgefertigte {type}-Gr‹nde:"
+  no-history: "&7Keine Eintr√§ge."
+  reasons-header: "&7Vorgefertigte {type}-Gr√ºnde:"
   reasons-line: "&7- {reason} &8({duration})"
-  reasons-empty: "&7Keine Eintrƒge."
+  reasons-empty: "&7Keine Eintr√§ge."
 
 punishments:
   mute-message: "&cDu bist gemutet: {reason} ({expires})"
 
 staff:
   whois: "&7Name: {name} UUID: {uuid} IP: {ip} Erst: {first} Letzt: {last}"
-  info-header: "&bInfo f‹r {player}"
+  info-header: "&bInfo f√ºr {player}"
   info-line: "&7UUID: {uuid} | IP: {ip}"
   info-joins: "&7Erster Join: {first} | Letzter Join: {last}"
   info-playtime: "&7Spielzeit: {playtime}"
@@ -114,16 +114,16 @@ staff:
   info-lastwarn: "&7Letzte Warnung: {reason} {created}"
   info-lastwarn-none: "&7Letzte Warnung: -"
   info-teleport: "&a[Vanishtp]"
-  gamemode: "&aGamemode gesetzt: {mode} f‹r {target}."
-  fly-enabled: "&aFlug aktiviert f‹r {target}."
-  fly-disabled: "&cFlug deaktiviert f‹r {target}."
+  gamemode: "&aGamemode gesetzt: {mode} f√ºr {target}."
+  fly-enabled: "&aFlug aktiviert f√ºr {target}."
+  fly-disabled: "&cFlug deaktiviert f√ºr {target}."
   healed: "&a{target} geheilt."
-  fed: "&a{target} gef‹ttert."
-  speed: "&aSpeed {speed} f‹r {target}."
-  invsee: "&7Inventar von {target} ge÷ffnet."
-  endersee: "&7Endertruhe von {target} ge÷ffnet."
-  vanish-enabled: "&aVanish aktiviert f‹r {target}."
-  vanish-disabled: "&cVanish deaktiviert f‹r {target}."
+  fed: "&a{target} gef√ºttert."
+  speed: "&aSpeed {speed} f√ºr {target}."
+  invsee: "&7Inventar von {target} ge√∂ffnet."
+  endersee: "&7Endertruhe von {target} ge√∂ffnet."
+  vanish-enabled: "&aVanish aktiviert f√ºr {target}."
+  vanish-disabled: "&cVanish deaktiviert f√ºr {target}."
   vtp: "&aVanish-TP zu {target}."
   tpall: "&a{count} Spieler zu dir teleportiert."
   tppos: "&aTeleportiert zu {x} {y} {z} in {world}."
@@ -154,25 +154,25 @@ help:
 auctionhouse:
   reloaded: "&aAuktionshaus neu geladen."
   listing:
-    created: "&aItem f‹r &f{price}&a eingestellt."
-    fee: "&7Einstellgeb‹hr: &f{fee}"
+    created: "&aItem f√ºr &f{price}&a eingestellt."
+    fee: "&7Einstellgeb√ºhr: &f{fee}"
   buy:
-    success: "&aGekauft f‹r &f{price}&a von &f{seller}&a."
+    success: "&aGekauft f√ºr &f{price}&a von &f{seller}&a."
   sell:
-    success: "&a{buyer} hat dein Item f‹r {price} gekauft. Ste‹r: {tax}"
+    success: "&a{buyer} hat dein Item f√ºr {price} gekauft. Steuer: {tax}"
   cancelled: "&aAuktion abgebrochen."
   cancelled-all: "&a{count} Auktionen abgebrochen."
   cancelled-none: "&7Keine aktiven Auktionen."
-  returned: "&a{count} Items zur‹ckgegeben."
+  returned: "&a{count} Items zur√ºckgegeben."
   return:
     empty: "&7Keine abgelaufenen oder abgebrochenen Items."
   sold:
-    cleared: "&7{count} verkaufte Eintrƒge gel÷scht."
-    empty: "&7Keine verkauften Eintrƒge."
+    cleared: "&7{count} verkaufte Eintr√§ge gel√∂scht."
+    empty: "&7Keine verkauften Eintr√§ge."
   announce:
-    listing: "&7{seller} bietet &f{item}&7 f‹r &a{price}&7 im Auktionshaus an."
+    listing: "&7{seller} bietet &f{item}&7 f√ºr &a{price}&7 im Auktionshaus an."
   sort:
-    time: "Ne‹ste"
+    time: "Neueste"
     price: "Preis"
   time:
     unlimited: "unbegrenzt"
@@ -182,10 +182,10 @@ auctionhouse:
     selling-title: "&8Deine Auktionen"
     sold-title: "&8Verkauft"
     expired-title: "&8Abgelaufen"
-    confirm-title: "&8Auktion bestƒtigen"
+    confirm-title: "&8Auktion best√§tigen"
     buttons:
       previous:
-        name: "&7Zur‹ck"
+        name: "&7Zur√ºck"
         lore:
           - "&7Seite {page}/{pages}"
       next:
@@ -195,7 +195,7 @@ auctionhouse:
       sort:
         name: "&bSortierung"
         lore:
-          - "&7Akt‹ll: {sort}"
+          - "&7Aktuell: {sort}"
       selling:
         name: "&bMeine Angebote"
         lore:
@@ -209,63 +209,62 @@ auctionhouse:
         lore:
           - "&7Abgelaufene/abgebrochene Items"
       back:
-        name: "&cZur‹ck"
+        name: "&cZur√ºck"
         lore:
-          - "&7Zur‹ck zum vorherigen Men‹"
+          - "&7Zur√ºck zum vorherigen Men√º"
       clear:
         name: "&cListe leeren"
         lore:
-          - "&7Verkaufte Eintrƒge l÷schen"
+          - "&7Verkaufte Eintr√§ge l√∂schen"
       confirm:
-        name: "&aBestƒtigen"
+        name: "&aBest√§tigen"
         lore:
           - "&7Preis: &f{price}"
-          - "&7Geb‹hr: &f{fee}"
+          - "&7Geb√ºhr: &f{fee}"
       cancel:
         name: "&cAbbrechen"
         lore:
           - "&7Auktion nicht erstellen"
     listing:
       price: "&7Preis: &a{price}"
-      seller: "&7Verkƒufer: &f{seller}"
-      buyer: "&7Kƒufer: &f{buyer}"
+      seller: "&7Verk√§ufer: &f{seller}"
+      buyer: "&7K√§ufer: &f{buyer}"
       time-left: "&7Verbleibend: &f{time}"
       sold-at: "&7Verkauft: &f{time}"
       enchants: "&7Verzauberungen:"
       enchant-line: "&7- {enchant} {level}"
   errors:
     disabled: "&cAuktionshaus ist deaktiviert."
-    economy-missing: "&cKein Economy-Plugin ‹ber Vault gefunden."
+    economy-missing: "&cKein Economy-Plugin √ºber Vault gefunden."
     no-item: "&cDu musst ein Item in der Hand halten."
-    invalid-price: "&cUng‹ltiger Preis."
+    invalid-price: "&cUng√ºltiger Preis."
     price-range: "&cPreis muss zwischen {min} und {max} liegen."
     restricted: "&cDieses Item ist gesperrt: {reason}"
-    invalid-stock: "&cUng‹ltige Anzahl."
+    invalid-stock: "&cUng√ºltige Anzahl."
     insufficient-funds: "&cNicht genug Guthaben."
     create-failed: "&cAuktion konnte nicht erstellt werden."
     not-found: "&cAuktion nicht gefunden."
-    not-available: "&cAuktion nicht verf‹gbar."
+    not-available: "&cAuktion nicht verf√ºgbar."
     expired: "&cAuktion ist abgelaufen."
     buy-own: "&cDu kannst deine eigene Auktion nicht kaufen."
     purchase-failed: "&cKauf fehlgeschlagen."
-    item-changed: "&cDas Item in deiner Hand hat sich geƒndert."
+    item-changed: "&cDas Item in deiner Hand hat sich ge√§ndert."
     cancel-failed: "&cAuktion konnte nicht abgebrochen werden."
-    return-failed: "&cR‹ckgabe fehlgeschlagen."
+    return-failed: "&cR√ºckgabe fehlgeschlagen."
     inventory-full: "&cInventar voll, Items wurden fallengelassen."
-    invalid-count: "&cUng‹ltige Anzahl."
+    invalid-count: "&cUng√ºltige Anzahl."
   help:
     - "&bAuktionshaus Befehle:"
-    - "&7/ah &f- Auktionshaus ÷ffnen"
+    - "&7/ah &f- Auktionshaus √∂ffnen"
     - "&7/ah search <filter> &f- Items suchen"
     - "&7/ah sell <preis> &f- Item in der Hand verkaufen"
     - "&7/ah selling &f- Deine Auktionen"
     - "&7/ah sold [clear] &f- Verkauft anzeigen/leeren"
     - "&7/ah expired &f- Abgelaufene Items"
     - "&7/ah cancel &f- Alle Auktionen abbrechen"
-    - "&7/ah return &f- Abgelaufene Items zur‹ck"
+    - "&7/ah return &f- Abgelaufene Items zur√ºck"
     - "&7/ah list <preis> [anzahl] &f- Server-Item listen"
     - "&7/ah ulist <preis> [anzahl] &f- Server-Item unlimitiert"
-    - "&7/ah menu <player> &f- Mit Zur‹ck-Button ÷ffnen"
-    - "&7/ah show <player> &f- F‹r Spieler ÷ffnen"
+    - "&7/ah menu <player> &f- Mit Zur√ºck-Button √∂ffnen"
+    - "&7/ah show <player> &f- F√ºr Spieler √∂ffnen"
     - "&7/ah reload &f- Auktionshaus neu laden"
-
